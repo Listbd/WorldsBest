@@ -1,0 +1,26 @@
+﻿<template>
+    <div>
+        <h1>Projects</h1>
+
+        <table v-if="projects.length" class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number of Tasks</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody v-for="project in projects">
+                <tr>
+                    <td>{{project.Name}}</td>
+                    <td>{{project.ProjectTasks.length}}</td>
+                    <td align="center">
+                        <button type="button" class="btn btn-danger" v-on:click="deleteProject(project, $event)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script src="./projects.ts"></script>

@@ -6,9 +6,17 @@ import { ProjectTask } from '../shared/interfaces/projectTask';
 @Component
 export default class ProjectsComponent extends Vue {
     projects: Project[] = [];
+    blankProject: Project;
 
     mounted() {
-        let auth = btoa(`xxx:xxx`);
+        this.blankProject = {
+            'ProjectId': 0,
+            'Name': '',
+            'ExternalSystemKey': '',
+            'ProjectTasks': []
+        };
+
+        let auth = btoa(`test:test`);
         let headers = { 'Authorization': 'Basic ' + auth };
         let url = 'https://b-timeback.azurewebsites.net/api/projects';
         //let url = 'api/SampleData/Projects';
@@ -20,32 +28,12 @@ export default class ProjectsComponent extends Vue {
         // previously thought
         // -----------------------------------------------------------------
 
-        //axios.get(url, { headers: headers })
-        //    .then(response => {
-        //        debugger;
-        //        vm.projects = response.data;
-        //    });
-
         fetch(url, { headers: headers })
             .then(response => response.json() as Promise<Project[]>)
             .then(data => {
                 // data is coming back Pascal case from the b-time api
                 this.projects = data;
             });
-
-        // TODO : fetch projects
-        //this.projects.push({
-        //    projectId: 1,
-        //    name: "test q",
-        //    projectTasks: [
-        //        {
-        //            projectTaskId: 1,
-        //            projectId: 1,
-        //            name: "Task 11",
-        //            billable: true,
-        //            requireComment: true
-        //        }]
-        //});
     }
 
     deleteProject = (data: any, b: any, c: any, d: any) =>

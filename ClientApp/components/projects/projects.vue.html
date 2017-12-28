@@ -10,13 +10,21 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody v-for="project in projects">
-                <tr>
+            <tbody>
+                <tr v-for="project in projects">
                     <td>{{project.Name}}</td>
                     <td>{{project.ProjectTasks.length}}</td>
                     <td align="center">
-                        <button type="button" class="btn btn-danger" v-on:click="deleteProject(project, $event)">Delete</button>
+                        <button type="button" class="btn btn-danger" v-on:click="deleteProject(project, $event)">
+                            Delete
+                        </button>
                     </td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" ng-model=vm.blankProject.Name /></td>
+                    <td><input class="form-control" readonly="readonly" /></td>
+                    <td><input class="form-control" ng-model=vm.blankProject.ExternalSystemKey /></td>
+                    <td align="center"><button type="button" class="btn btn-success" ng-click="vm.addProject(vm.blankProject)">Add</button></td>
                 </tr>
             </tbody>
         </table>

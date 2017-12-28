@@ -1,7 +1,9 @@
 ﻿import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component } from '../../../node_modules/vue-property-decorator/lib/vue-property-decorator';
 import { Project } from '../shared/interfaces/project';
 import { ProjectTask } from '../shared/interfaces/projectTask';
+
+//import { TimeTrackerService } from '../shared/timeTrackerService';
 
 @Component
 export default class ProjectsComponent extends Vue {
@@ -28,12 +30,18 @@ export default class ProjectsComponent extends Vue {
         // previously thought
         // -----------------------------------------------------------------
 
+        //this.projects = fetchProjects(); // from TimeTrackerService
+
         fetch(url, { headers: headers })
             .then(response => response.json() as Promise<Project[]>)
             .then(data => {
                 // data is coming back Pascal case from the b-time api
                 this.projects = data;
             });
+    }
+
+    addProject = () => {
+        alert('not yet');
     }
 
     deleteProject = (data: any, b: any, c: any, d: any) =>

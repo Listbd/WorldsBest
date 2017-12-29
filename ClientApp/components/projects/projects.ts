@@ -2,7 +2,7 @@
 import { Component } from 'vue-property-decorator';
 import { Project } from '../shared/interfaces/project';
 import { ProjectTask } from '../shared/interfaces/projectTask';
-
+//import * as toastr from 'toastr';
 import { TimeTrackerService } from '../shared/timeTrackerService';
 
 @Component
@@ -54,13 +54,18 @@ export default class ProjectsComponent extends Vue {
             'Content-Type': 'application/json'
         };
 
-        let bp = this.blankProject;
-
         let url = TimeTrackerService.url + "projects?format=json&callId=" + TimeTrackerService.generateGuid();
-        fetch(url, { method: 'post', headers: headers, body: JSON.stringify( bp ) })
+        fetch(url,
+            {
+                method: 'post',
+                headers: headers,
+                body: 'z'//JSON.stringify(this.blankProject)
+            })
             .then((data) => {
+                //toastr.success("Win!");
                 debugger;
             }).catch(error => {
+                //toastr.error("Nope");
                 debugger;
             });
 

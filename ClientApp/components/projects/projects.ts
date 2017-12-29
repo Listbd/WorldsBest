@@ -1,9 +1,9 @@
 ﻿import Vue from 'vue';
-import { Component } from '../../../node_modules/vue-property-decorator/lib/vue-property-decorator';
+import { Component } from 'vue-property-decorator';
 import { Project } from '../shared/interfaces/project';
 import { ProjectTask } from '../shared/interfaces/projectTask';
 
-//import { TimeTrackerService } from '../shared/timeTrackerService';
+import { TimeTrackerService } from '../shared/timeTrackerService';
 
 @Component
 export default class ProjectsComponent extends Vue {
@@ -30,7 +30,8 @@ export default class ProjectsComponent extends Vue {
         // previously thought
         // -----------------------------------------------------------------
 
-        //this.projects = fetchProjects(); // from TimeTrackerService
+        // Get ERROR does not pass Access-Control-Allow-Origin, CORS issues?
+        // this.projects = TimeTrackerService.fetchProjects(); // from TimeTrackerService
 
         fetch(url, { headers: headers })
             .then(response => response.json() as Promise<Project[]>)
@@ -41,12 +42,40 @@ export default class ProjectsComponent extends Vue {
     }
 
     addProject = () => {
-        alert('not yet');
+        //alert('not yet');
+        debugger;
+        let auth = btoa(`test:test`);
+        let headers = { 'Authorization': 'Basic ' + auth };
+
+        var url = TimeTrackerService.url + "Projects?format=json&callId=" + TimeTrackerService.generateGuid();
+        fetch(url, { method: 'post', headers: headers, body: this.blankProject })
+            .then((data) => {
+                debugger
+            }).catch(error => {
+                debugger;
+            });
+
+        // TODO refetch projects
+
+        //var r = $http({
+        //    url: url,
+        //    method: 'POST',
+        //    headers: { 'Authorization': 'Basic ' + authService.getAuthCode() },
+        //    data: project
+        //});
+
     }
 
     deleteProject = (data: any, b: any, c: any, d: any) =>
     {
         debugger;
         alert(`Clicked on ${data.name}. ... delete project not implemented`);
+        //var url = apiurl + "/Projects/" + projectId + "?format=json&callId=" + common.generateGuid();
+        //var r = $http({
+        //    url: url,
+        //    method: 'DELETE',
+        //    headers: { 'Authorization': 'Basic ' + authService.getAuthCode() }
+        //});
+
     }
 }

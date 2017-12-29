@@ -1,20 +1,31 @@
-﻿import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import { Project } from '../shared/interfaces/project';
+﻿import { Project } from '../shared/interfaces/project';
 
-@Component
-export default class TimeTrackerService extends Vue {
-    url: string = 'https://b-timeback.azurewebsites.net/api/';
-    auth = btoa(`test:test`); // TODO - change to logged in user
-    headers = { 'Authorization': 'Basic ' + this.auth };
+// TODO - this feels like a poor man's service implementation
 
-    fetchProjects = () => {
-        return fetch(this.url, { headers: this.headers })
+export abstract class TimeTrackerService {
+    static url: string = 'https://b-timeback.azurewebsites.net/api/';
+
+    static fetchProjects = () => {
+        let headers = { 'Authorization': 'Basic ' + btoa(`test:test`) };
+        let f = fetch(TimeTrackerService.url, { headers: headers })
             .then(response => response.json() as Promise<Project[]>)
             .then(data => {
                 return data;
             }).catch(error => {
                 // TODO
             });
+        if (f instanceof Array) return f;
+        else return [];
+    }
+
+    static s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+
+    static generateGuid = () => {
+        return TimeTrackerService.s4() + TimeTrackerService.s4() + '-' + TimeTrackerService.s4() + '-' + TimeTrackerService.s4() + '-' +
+            TimeTrackerService.s4() + '-' + TimeTrackerService.s4() + TimeTrackerService.s4() + TimeTrackerService.s4();
     }
 }

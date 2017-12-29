@@ -3,7 +3,8 @@
 // TODO - this feels like a poor man's service implementation
 
 export abstract class TimeTrackerService {
-    static url: string = 'https://b-timeback.azurewebsites.net/api/';
+    //static url: string = 'https://b-timeback.azurewebsites.net/api/';
+    static url: string = 'http://localhost:57214/api/';
 
     static fetchProjects = () => {
         let headers = { 'Authorization': 'Basic ' + btoa(`test:test`) };

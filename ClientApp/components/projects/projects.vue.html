@@ -2,7 +2,7 @@
     <div>
         <h1>Projects</h1>
 
-        <table v-if="projects.length" class="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="project in projects">
+                <tr v-if="projects.length" v-for="project in projects">
                     <td>{{project.Name}}</td>
                     <td>{{project.ProjectTasks.length}}</td>
                     <td>{{project.ExternalSystemKey}}</td>

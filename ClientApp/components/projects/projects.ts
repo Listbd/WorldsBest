@@ -10,17 +10,20 @@ export default class ProjectsComponent extends Vue {
     projects: Project[] = [];
     blankProject: Project;
 
-    mounted() {
+    constructor() {
+        super();
         this.blankProject = {
-            'ProjectId': 0,
-            'Name': '',
-            'ExternalSystemKey': '',
-            'ProjectTasks': []
+            Name: '',
+            ExternalSystemKey: '',
+            ProjectId: 0,
+            ProjectTasks: []
         };
+    }
 
+    mounted() {
         let auth = btoa(`test:test`);
         let headers = { 'Authorization': 'Basic ' + auth };
-        let url = 'https://b-timeback.azurewebsites.net/api/projects';
+        let url = TimeTrackerService.url + 'projects';
         //let url = 'api/SampleData/Projects';
 
         // -----------------------------------------------------------------
@@ -45,12 +48,18 @@ export default class ProjectsComponent extends Vue {
         //alert('not yet');
         debugger;
         let auth = btoa(`test:test`);
-        let headers = { 'Authorization': 'Basic ' + auth };
+        let headers = {
+            'Authorization': 'Basic ' + auth,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
 
-        var url = TimeTrackerService.url + "Projects?format=json&callId=" + TimeTrackerService.generateGuid();
-        fetch(url, { method: 'post', headers: headers, body: this.blankProject })
+        let bp = this.blankProject;
+
+        let url = TimeTrackerService.url + "projects?format=json&callId=" + TimeTrackerService.generateGuid();
+        fetch(url, { method: 'post', headers: headers, body: JSON.stringify( bp ) })
             .then((data) => {
-                debugger
+                debugger;
             }).catch(error => {
                 debugger;
             });

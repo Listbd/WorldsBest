@@ -2,21 +2,32 @@
     <div>
         <h1>Projects</h1>
 
-        <table v-if="projects.length" class="table">
+        <h1>{{projects.length}}</h1>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Number of Tasks</th>
+                    <th>External Key</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody v-for="project in projects">
-                <tr>
+            <tbody>
+                <tr v-if="projects.length" v-for="project in projects">
                     <td>{{project.Name}}</td>
                     <td>{{project.ProjectTasks.length}}</td>
+                    <td>{{project.ExternalSystemKey}}</td>
                     <td align="center">
-                        <button type="button" class="btn btn-danger" v-on:click="deleteProject(project, $event)">Delete</button>
+                        <button type="button" class="btn btn-danger" v-on:click="deleteProject(project, $event)">
+                            Delete
+                        </button>
                     </td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" v-model="blankProject.Name" /></td>
+                    <td><input class="form-control" readonly="readonly" /></td>
+                    <td><input class="form-control" v-model="blankProject.ExternalSystemKey" /></td>
+                    <td align="center"><button type="button" class="btn btn-success" @click="addProject()">Add</button></td>
                 </tr>
             </tbody>
         </table>

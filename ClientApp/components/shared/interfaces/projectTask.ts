@@ -1,7 +1,7 @@
 ﻿export interface ProjectTask {
-    projectTaskId: number;
-    projectId: number;
-    name: string;
-    billable: boolean;
-    requireComment: boolean;
+    ProjectTaskId: number;
+    ProjectId: number;
+    Name: string;
+    Billable: boolean;
+    RequireComment: boolean;
 }

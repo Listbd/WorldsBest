@@ -1,9 +1,11 @@
 ﻿import Vue from 'vue';
+import axios from 'axios';
 import { Component } from 'vue-property-decorator';
 import { Project } from '../shared/interfaces/project';
 import { ProjectTask } from '../shared/interfaces/projectTask';
 //import * as toastr from 'toastr';
 import { TimeTrackerService } from '../shared/timeTrackerService';
+
 
 @Component
 export default class ProjectsComponent extends Vue {
@@ -36,47 +38,36 @@ export default class ProjectsComponent extends Vue {
         // Get ERROR does not pass Access-Control-Allow-Origin, CORS issues?
         // this.projects = TimeTrackerService.fetchProjects(); // from TimeTrackerService
 
-        fetch(url, { headers: headers })
-            .then(response => response.json() as Promise<Project[]>)
-            .then(data => {
+        //fetch(url, { headers: headers })
+        //    .then(response => response.json() as Promise<Project[]>)
+        //    .then(data => {
+        //        // data is coming back Pascal case from the b-time api
+        //        this.projects = data;
+        //    });
+
+        axios.get(url, { headers: headers })
+            .then(response => {
+                debugger;
                 // data is coming back Pascal case from the b-time api
-                this.projects = data;
+                this.projects = response.data;
             });
+
     }
 
     addProject = () => {
-        //alert('not yet');
-        debugger;
         let auth = btoa(`test:test`);
-        let headers = {
-            'Authorization': 'Basic ' + auth,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        };
-
+        let headers = { 'Authorization': 'Basic ' + auth };
         let url = TimeTrackerService.url + "projects?format=json&callId=" + TimeTrackerService.generateGuid();
-        fetch(url,
-            {
-                method: 'post',
-                headers: headers,
-                body: 'z'//JSON.stringify(this.blankProject)
-            })
-            .then((data) => {
-                //toastr.success("Win!");
+        axios.post(url, this.blankProject, { headers: headers })
+            .then(data => {
                 debugger;
             }).catch(error => {
-                //toastr.error("Nope");
+                console.log(error.response);
                 debugger;
             });
 
         // TODO refetch projects
 
-        //var r = $http({
-        //    url: url,
-        //    method: 'POST',
-        //    headers: { 'Authorization': 'Basic ' + authService.getAuthCode() },
-        //    data: project
-        //});
 
     }
 

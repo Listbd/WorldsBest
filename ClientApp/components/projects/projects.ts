@@ -14,6 +14,10 @@ export default class ProjectsComponent extends Vue {
 
     constructor() {
         super();
+        this.initializeBlankProject();
+    }
+
+    initializeBlankProject() {
         this.blankProject = {
             Name: '',
             ExternalSystemKey: '',
@@ -54,33 +58,59 @@ export default class ProjectsComponent extends Vue {
 
     }
 
-    addProject = () => {
+    addProject() {
+        //this.projects.push(this.blankProject);
+
         let auth = btoa(`test:test`);
         let headers = { 'Authorization': 'Basic ' + auth };
         let url = TimeTrackerService.url + "projects?format=json&callId=" + TimeTrackerService.generateGuid();
         axios.post(url, this.blankProject, { headers: headers })
-            .then(data => {
-                debugger;
+            .then(response => {
+                let newProject = response.data;
+                // it doesn't have tasks yet so give it a blank array
+                newProject.ProjectTasks = [];
+                this.projects.push(newProject);
+
+                this.initializeBlankProject();
+                // refetch projects
+                //axios.get(TimeTrackerService.url + 'projects', { headers: headers })
+                //    .then(response2 => {
+                //        // data is coming back Pascal case from the b-time api
+                //        this.projects = response2.data;
+                //    });
             }).catch(error => {
+                // TODO - toastr or something
                 console.log(error.response);
-                debugger;
             });
-
-        // TODO refetch projects
-
-
     }
 
-    deleteProject = (data: any, b: any, c: any, d: any) =>
-    {
-        debugger;
-        alert(`Clicked on ${data.name}. ... delete project not implemented`);
-        //var url = apiurl + "/Projects/" + projectId + "?format=json&callId=" + common.generateGuid();
-        //var r = $http({
-        //    url: url,
-        //    method: 'DELETE',
-        //    headers: { 'Authorization': 'Basic ' + authService.getAuthCode() }
-        //});
+    // ARROW FUNCTION DOES NOT WORK, IT DOES NOT CORRECTLY DETERMINE WHAT THIS IS
+    // xxxx-nope--->   deleteProject = (project: Project) => {
+
+    // FROM THE DOCS
+    // Don’t use arrow functions on an options property or callback, such as 
+    // created: () => console.log(this.a) or vm.$watch('a', newValue => this.myMethod()).
+    // Since arrow functions are bound to the parent context, this will not be the Vue 
+    // instance as you’d expect, often resulting in errors such as Uncaught TypeError: Cannot 
+    // read property of undefined or Uncaught TypeError: this.myMethod is not a function.
+
+    deleteProject(project: Project, event: any) {
+        //if (this.projects.length > 0) {
+        //    this.projects.pop();
+        //}
+        let url = `${TimeTrackerService.url}projects/${project.ProjectId}?format=json&callId=${TimeTrackerService.generateGuid()}`;
+        let auth = btoa(`test:test`);
+        let headers = { 'Authorization': 'Basic ' + auth };
+        axios.delete(url, { headers: headers })
+            .then(response => {
+                // remove this one from the array
+                // vue doesn't have find, so use filter
+                this.projects = this.projects.filter(item => {
+                    if (item.ProjectId !== project.ProjectId) return item;
+                });
+            })
+            
+
 
     }
 }

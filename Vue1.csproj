@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\login\login.ts" />
     <None Remove="ClientApp\components\projects\projects.ts" />
     <None Remove="ClientApp\components\shared\timeTrackerService.ts" />
   </ItemGroup>
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\login\login.ts" />
     <TypeScriptCompile Include="ClientApp\components\projects\projects.ts" />
     <TypeScriptCompile Include="ClientApp\components\shared\timeTrackerService.ts" />
   </ItemGroup>

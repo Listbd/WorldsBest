@@ -7,4 +7,8 @@ import { Component } from 'vue-property-decorator';
     }
 })
 export default class AppComponent extends Vue {
+    //beforeCreate() {
+    //    let auth = btoa(`test:test`);
+    //    localStorage.setItem('hackauth2', auth);
+    //}
 }

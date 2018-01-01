@@ -8,7 +8,7 @@ export abstract class TimeTrackerService {
     static apiUrl: string = 'http://localhost:57214/api/';
 
     static getProjects() {
-        let auth = btoa(`test:test`);
+        let auth = localStorage.getItem('hackauth2');
         let headers = { 'Authorization': 'Basic ' + auth };
         let url = TimeTrackerService.apiUrl + 'projects';
         let result: Project[] = [];
@@ -16,7 +16,7 @@ export abstract class TimeTrackerService {
     }
 
     static addProject(project: Project) {
-        let auth = btoa(`test:test`);
+        let auth = localStorage.getItem('hackauth2');
         let headers = { 'Authorization': 'Basic ' + auth };
         let url = TimeTrackerService.apiUrl + "projects?format=json&callId=" + TimeTrackerService.generateGuid();
         return axios.post(url, project, { headers: headers });
@@ -24,7 +24,7 @@ export abstract class TimeTrackerService {
 
     static deleteProject(projectId: number) {
         let url = `${TimeTrackerService.apiUrl}projects/${projectId}?format=json&callId=${TimeTrackerService.generateGuid()}`;
-        let auth = btoa(`test:test`);
+        let auth = localStorage.getItem('hackauth2');
         let headers = { 'Authorization': 'Basic ' + auth };
         return axios.delete(url, { headers: headers });
     }

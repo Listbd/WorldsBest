@@ -1,7 +1,7 @@
 ﻿<template>
     <div>
         <h1>Projects</h1>
-
+        <router-link to='project/1'>CNN</router-link>
         <h1>{{projects.length}}</h1>
         <table class="table">
             <thead>
@@ -27,7 +27,7 @@
                     <td><input class="form-control" v-model="blankProject.Name" /></td>
                     <td><input class="form-control" readonly="readonly" /></td>
                     <td><input class="form-control" v-model="blankProject.ExternalSystemKey" /></td>
-                    <td align="center"><button type="button" class="btn btn-success" @click="addProject()">Add</button></td>
+                    <td align="center"><button type="button" class="btn btn-success" v-on:click="addProject()">Add</button></td>
                 </tr>
             </tbody>
         </table>

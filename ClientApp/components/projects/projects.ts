@@ -6,6 +6,7 @@ import { ProjectTask } from '../shared/interfaces/projectTask';
 //import * as toastr from 'toastr';
 import { TimeTrackerService } from '../shared/timeTrackerService';
 
+import router from 'vue-router';
 
 @Component
 export default class ProjectsComponent extends Vue {
@@ -69,5 +70,7 @@ export default class ProjectsComponent extends Vue {
 
     openProject(project: Project) {
         alert(project.Name);
+        this.$router.push("project/1");
+        
     }
 }

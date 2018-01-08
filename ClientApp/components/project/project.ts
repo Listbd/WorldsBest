@@ -14,6 +14,13 @@ export default class ProjectComponent extends Vue {
 
     mounted() {
         alert(this.id);
+
+        this.project = {
+            ProjectId: 0,
+            Name: "dummy",
+            ExternalSystemKey: "",
+            ProjectTasks: []
+        };
         //TimeTrackerService.getProject(this.id).then(response => {
         //    this.projects = response.data;
         //}).catch(error => {

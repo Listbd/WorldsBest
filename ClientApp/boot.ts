@@ -10,6 +10,7 @@ const routes = [
     { path: '/counter', component: require('./components/counter/counter.vue.html') },
     { path: '/fetchdata', component: require('./components/fetchdata/fetchdata.vue.html') },
     { path: '/projects', component: require('./components/projects/projects.vue.html') },
+    { path: '/project/:id', component: require('./components/project/project.vue.html') },
     { path: '/login', component: require('./components/login/login.vue.html') },
 ];
 

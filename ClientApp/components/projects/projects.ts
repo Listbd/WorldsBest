@@ -70,8 +70,8 @@ export default class ProjectsComponent extends Vue {
 
     openProject(project: Project) {
         alert(project.Name);
-        //this.$router.push({ path: `project`, params: { id: `${project.ProjectId}` } });
-        this.$router.push(`project/${project.ProjectId}`);
-        
+        this.$router.push({ name: `test`, params: { id: `${project.ProjectId}` } });
+        //this.$router.push(`project/${project.ProjectId}`);
+        debugger;
     }
 }

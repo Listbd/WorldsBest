@@ -1,0 +1,42 @@
+﻿<template>
+    <div>
+        <h1>Project</h1>
+        <span>{{project.Name}}</span>
+
+        <h1>Project Tasks</h1>
+        <h1>{{project.ProjectTasks.length}}</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>External Key</th>
+                    <th>Billable?</th>
+                    <th>Require Comment?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-if="project.ProjectTasks.length" v-for="task in project.ProjectTasks">
+                    <td>{{task.Name}}</td>
+                    <td>{{task.ExternalSystemKey}}</td>
+                    <td>{{task.Billable}}</td>
+                    <td>{{task.RequireComment}}</td>
+                    <td align="center">
+                        <button type="button" class="btn btn-danger" v-on:click="deleteTask(task, $event)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" v-model="blankTask.Name" /></td>
+                    <td><input class="form-control" v-model="blankProject.ExternalSystemKey" /></td>
+                    <td>billable - todo</td>
+                    <td>require comment - todo</td>
+                    <td align="center"><button type="button" class="btn btn-success" @click="addTask()">Add</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+<script src="./project.ts"></script>

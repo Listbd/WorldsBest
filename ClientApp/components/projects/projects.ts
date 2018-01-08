@@ -65,8 +65,9 @@ export default class ProjectsComponent extends Vue {
                 if (item.ProjectId !== project.ProjectId) return item;
             });
         })
-            
+    }
 
-
+    openProject(project: Project) {
+        alert(project.Name);
     }
 }

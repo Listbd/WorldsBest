@@ -12,7 +12,11 @@ export default class ProjectComponent extends Vue {
 
     project: Project;
 
-    mounted() {
+    constructor() {
+        super();
+    }
+
+    beforeMount() {
         alert(this.id);
 
         this.project = {
@@ -21,6 +25,10 @@ export default class ProjectComponent extends Vue {
             ExternalSystemKey: "",
             ProjectTasks: []
         };
+
+    }
+
+    mounted() {
         //TimeTrackerService.getProject(this.id).then(response => {
         //    this.projects = response.data;
         //}).catch(error => {

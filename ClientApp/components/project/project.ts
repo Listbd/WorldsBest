@@ -18,6 +18,15 @@ export default class ProjectComponent extends Vue {
         this.initializeBlankProjectTask();
     }
 
+    getProjectName() {
+        if (this.project) {
+            return this.project.Name;
+        }
+        else {
+            return '';
+        }
+    }
+
     initializeBlankProjectTask() {
         this.blankProjectTask = {
             Name: '',
@@ -33,24 +42,9 @@ export default class ProjectComponent extends Vue {
         return parseInt(id);
     }
 
-    beforeMount() {
-        //alert(this.id);
-
-        this.project = {
-            ProjectId: 0,
-            Name: "a",
-            ExternalSystemKey: "",
-            ProjectTasks: []
-        };
-    }
-
     mounted() {
-        alert(this.project.Name);
-        this.project.Name = 'b;';
-        alert(this.project.Name);
         TimeTrackerService.getProject(this.coerceId(this.id)).then(response => {
             this.project = response.data;
-            this.project.Name = 'c;';
             debugger;
         }).catch(error => {
             debugger;

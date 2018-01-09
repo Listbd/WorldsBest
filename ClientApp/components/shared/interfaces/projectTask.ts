@@ -4,4 +4,5 @@
     Name: string;
     Billable: boolean;
     RequireComment: boolean;
+    ExternalSystemKey: string;
 }

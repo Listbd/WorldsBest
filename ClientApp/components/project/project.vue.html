@@ -1,10 +1,9 @@
 ﻿<template>
     <div>
-        <h1>Project</h1>
-        {{project.Name}}
+        <h1>Project {{project.Name}}</h1>
 
-        <h1>Project Tasks</h1>
-        <!--<h1>{{project.ProjectTasks.length}}</h1>
+        <!--<h1>Project Tasks</h1>
+        <h1>{{project.ProjectTasks.length}}</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -28,8 +27,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input class="form-control" v-model="blankTask.Name" /></td>
-                    <td><input class="form-control" v-model="blankProject.ExternalSystemKey" /></td>
+                    <td><input class="form-control" v-model="blankProjectTask.Name" /></td>
+                    <td><input class="form-control" v-model="blankProjectTask.ExternalSystemKey" /></td>
                     <td>billable - todo</td>
                     <td>require comment - todo</td>
                     <td align="center"><button type="button" class="btn btn-success" @click="addTask()">Add</button></td>

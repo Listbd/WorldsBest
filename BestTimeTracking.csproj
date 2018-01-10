@@ -11,6 +11,7 @@
     <None Remove="ClientApp\components\login\login.ts" />
     <None Remove="ClientApp\components\projects\projects.ts" />
     <None Remove="ClientApp\components\project\project.ts" />
+    <None Remove="ClientApp\components\shared\interfaces\projectRole.ts" />
     <None Remove="ClientApp\components\shared\interfaces\timeEntry.ts" />
     <None Remove="ClientApp\components\shared\timeTrackerService.ts" />
     <None Remove="ClientApp\components\timeEntry\timeEntry.ts" />
@@ -32,6 +33,7 @@
     <TypeScriptCompile Include="ClientApp\components\login\login.ts" />
     <TypeScriptCompile Include="ClientApp\components\projects\projects.ts" />
     <TypeScriptCompile Include="ClientApp\components\project\project.ts" />
+    <TypeScriptCompile Include="ClientApp\components\shared\interfaces\projectRole.ts" />
     <TypeScriptCompile Include="ClientApp\components\shared\interfaces\timeEntry.ts" />
     <TypeScriptCompile Include="ClientApp\components\shared\timeTrackerService.ts" />
     <TypeScriptCompile Include="ClientApp\components\timeEntry\timeEntry.ts" />

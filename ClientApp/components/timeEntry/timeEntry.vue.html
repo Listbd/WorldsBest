@@ -4,7 +4,7 @@
         <div class="form-group">
             <div class="panel panel-primary" v-for="(dayEntry, index) of dayEntries">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{dayEntry.title}}</h3>
+                    <h3 class="panel-title">{{dayEntry.dateDisplay}}</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
@@ -22,19 +22,30 @@
                         <tbody>
                             <tr v-if="index === 0">
                                 <td>
-                                    <select class="form-control" v-model="blankTimeEntry.Project" v-on:change="updateTasks">
+                                    <select class="form-control" v-model="blankTimeEntry.SelectedProject" v-on:change="updateTasks">
                                         <option value="">--Select--</option>
-                                        <option v-for="project in projectOptions" v-bind:value="project.ProjectId">
+                                        <option v-for="project in projectOptions" v-bind:value="project">
                                             {{project.Name}}
                                         </option>
                                     </select>
                                 </td>
-                                <td>task name</td>
+                                <td>
+                                    <select class="form-control" v-model="blankTimeEntry.SelectedTask">
+                                        <option value="">--Select--</option>
+                                        <option v-for="task in taskOptions" v-bind:value="task">
+                                            {{task.Name}}
+                                        </option>
+                                    </select>
+                                </td>
                                 <td>timein</td>
                                 <td>timeout</td>
                                 <td>duration</td>
                                 <td>comment</td>
-                                <td>buttons</td>
+                                <td align="center">
+                                    <button type="button" class="btn btn-default" v-bind:disabled="blankTimeEntry.SelectedTask === undefined" @click="startWork(dayEntry.dateDisplay)">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </td>
                             </tr>
                             <tr v-for="timeEntry of dayEntry.timeEntries">
                                 <td>project name</td>

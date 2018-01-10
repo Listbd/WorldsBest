@@ -23,7 +23,8 @@ export default class ProjectsComponent extends Vue {
             Name: '',
             ExternalSystemKey: '',
             ProjectId: 0,
-            ProjectTasks: []
+            ProjectTasks: [],
+            ProjectRoles: []
         };
     }
 

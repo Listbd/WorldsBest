@@ -1,5 +1,66 @@
 ﻿<template>
-    <h1>Time Entry</h1>
+    <fieldset>
+        <h1>Time Entry</h1>
+        <div class="form-group">
+            <div class="panel panel-primary" v-for="(dayEntry, index) of dayEntries">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{dayEntry.title}}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="15%">Project</th>
+                                <th width="15%">Task</th>
+                                <th width="16%">Start</th>
+                                <th width="16%">End</th>
+                                <th style="text-align:center" width="10%">Duration</th>
+                                <th width="20%">Comment</th>
+                                <th style="text-align:center" width="10%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="0 === 0">
+                                <td>
+                                    <select class="form-control" v-model="blankTimeEntry.Project" v-on:change="updateTasks">
+                                        <option value="">--Select--</option>
+                                        <option v-for="project in projectOptions" v-bind:value="project.ProjectId">
+                                            {{project.Name}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>task name</td>
+                                <td>timein</td>
+                                <td>timeout</td>
+                                <td>duration</td>
+                                <td>comment</td>
+                                <td>buttons</td>
+                            </tr>
+                            <tr v-for="timeEntry of dayEntry.timeEntries">
+                                <td>project name</td>
+                                <td>task name</td>
+                                <td>timein</td>
+                                <td>timeout</td>
+                                <td>duration</td>
+                                <td>comment</td>
+                                <td>buttons</td>
+                            </tr>
+                            <tr>
+                                <td />
+                                <td />
+                                <td />
+                                <td />
+                                <td align="center">total for the day</td>
+                                <td />
+                                <td />
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
 </template>
 
 <script src="./timeEntry.ts"></script>

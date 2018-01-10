@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-if="0 === 0">
+                            <tr v-if="index === 0">
                                 <td>
                                     <select class="form-control" v-model="blankTimeEntry.Project" v-on:change="updateTasks">
                                         <option value="">--Select--</option>
@@ -45,7 +45,7 @@
                                 <td>comment</td>
                                 <td>buttons</td>
                             </tr>
-                            <tr>
+                            <tr v-if="dayEntry.timeEntries.length">
                                 <td />
                                 <td />
                                 <td />

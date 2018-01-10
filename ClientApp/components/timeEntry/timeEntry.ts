@@ -50,21 +50,36 @@ export default class TimeEntryComponent extends Vue {
         });
 
         // Get time entries
+        let timeEntryPromises: Promise<any>[] = [];
         let daysToPull = 10;
         for (let i = 0; i < daysToPull; i++) {
             let dateFormatted = moment(Date.now()).subtract(i, 'days').format('YYYY-MM-DD');
-            TimeTrackerService.getTimeEntriesForDate(dateFormatted).then(response => {
-                debugger;
-                let dayEntry = {
-                    title: dateFormatted,
-                    timeEntries: response.data
-                }
-                this.dayEntries.push(dayEntry);
-            }).catch(error => {
-                console.log(error.Message);
-                debugger;
-            });
+            timeEntryPromises.push(this.getTimeEntriesForDate(dateFormatted));
         }
+        Promise.all<any>(timeEntryPromises).then(result => {
+            if (this.dayEntries.length === 0) {
+                // Nothing yet exists, so make the first group (today) manually
+                let newEntry = {
+                    title: moment(Date.now()).format('YYYY-MM-DD'),
+                    timeEntries: []
+                };
+                this.dayEntries.push(newEntry);
+            }
+        });
+
+    }
+
+    getTimeEntriesForDate(dateToGet: string) {
+        return TimeTrackerService.getTimeEntriesForDate(dateToGet)
+            .then(response => {
+                if (response.data.length > 0) {
+                    let dayEntry = {
+                        title: dateToGet,
+                        timeEntries: response.data
+                    }
+                    this.dayEntries.push(dayEntry);
+                }
+            });
     }
 
     updateTasks(data: any) {

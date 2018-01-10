@@ -50,6 +50,13 @@ export abstract class TimeTrackerService {
         return axios.delete(url, { headers: headers });
     }
 
+    static getTimeEntriesForDate(timeDate: string) {
+        let url = `${TimeTrackerService.apiUrl}timeentries/date/${timeDate}?format=json&callId=${TimeTrackerService.generateGuid()}`;
+        let auth = localStorage.getItem('hackauth2');
+        let headers = { 'Authorization': 'Basic ' + auth };
+        return axios.get(url, { headers: headers });
+    }
+
     static s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)

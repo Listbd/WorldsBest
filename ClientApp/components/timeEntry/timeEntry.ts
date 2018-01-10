@@ -29,7 +29,7 @@ export default class TimeEntryComponent extends Vue {
         this.initializeBlankTimeEntry();
     }
 
-	initializeBlankTimeEntry(): void {
+    initializeBlankTimeEntry(): void {
 
         this.blankTimeEntry = {
             ProjectRoleId: 0,
@@ -77,6 +77,24 @@ export default class TimeEntryComponent extends Vue {
     getTimeEntriesForDate(dateToGet: string) {
         return TimeTrackerService.getTimeEntriesForDate(dateToGet)
             .then(response => {
+                debugger;
+                // TODO - structure of response is actually...
+                //Billable: true
+                //Comment: ""
+                //Hours: null
+                //ProjectName: "asdfas"
+                //ProjectRoleId: 1
+                //ProjectRoleName: "Default"
+                //ProjectTaskId: 1
+                //ProjectTaskName: "West"
+                //TimeEntryId: 3
+                //TimeIn: "2018-01-10T14:26:00"
+                //TimeOut: null
+                //TotalBillableTime: "00:20:43.2100633"
+                //TotalBillableTimeDisplay: "0.35"
+                //TotalTime: "00:20:43.2100633"
+                //TotalTimeDisplay: "0.35"
+
                 if (response.data.length > 0) {
                     let dayEntry = {
                         dateDisplay: dateToGet,
@@ -181,7 +199,7 @@ export default class TimeEntryComponent extends Vue {
             }
         }
 
-        let timepart:string[] = [];
+        let timepart: string[] = [];
         if (pieces.length > 0) {
             timepart = pieces[0].split(":");
             // get this out of the way..

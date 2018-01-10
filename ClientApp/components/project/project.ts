@@ -73,15 +73,25 @@ export default class ProjectComponent extends Vue {
     addTask() {
         this.blankProjectTask.ProjectId = this.project.ProjectId;
         TimeTrackerService.addProjectTask(this.blankProjectTask).then(response => {
-            let newProjecTask = response.data;
-            this.project.ProjectTasks.push(newProjecTask);
+            let newProjectTask: ProjectTask = response.data;
+
+            // !!!!the back end does not return billable or requirecomment??!
+            // so just pull those value from the post data
+            newProjectTask.Billable = this.blankProjectTask.Billable;
+            newProjectTask.RequireComment = this.blankProjectTask.RequireComment;
+
+            this.project.ProjectTasks.push(newProjectTask);
             this.initializeBlankProjectTask();
         }).catch(error => {
             console.log(error.response);
         });
     }
 
-    deleteTask() {
-
+    deleteTask(projectTask: ProjectTask, event: any) {
+        TimeTrackerService.deleteProjectTask(projectTask.ProjectTaskId).then(response => {
+            this.project.ProjectTasks = this.project.ProjectTasks.filter(item => {
+                if (item.ProjectTaskId !== projectTask.ProjectTaskId) return item;
+            });
+        });
     }
 }
